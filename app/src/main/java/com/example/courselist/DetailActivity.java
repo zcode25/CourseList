@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.courselist.helper.Helper;
+
 public class DetailActivity extends AppCompatActivity {
 
     private TextView nim, name, email, phone;
     private String nimString, nameString, emailString, phoneString;
+    Helper db = new Helper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +34,13 @@ public class DetailActivity extends AppCompatActivity {
         name.setText(nameString);
         email.setText(emailString);
         phone.setText(phoneString);
+
+        TextView subject = findViewById(R.id.text_subject);
+        String count = db.count();
+        subject.setText(count);
+
+        TextView student = findViewById(R.id.text_student);
+        String count2 = db.count2();
+        student.setText(count2);
     }
 }
