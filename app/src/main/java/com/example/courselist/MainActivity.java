@@ -56,13 +56,21 @@ public class MainActivity extends AppCompatActivity {
                 final String name = lists.get(i).getName();
                 final String email = lists.get(i).getEmail();
                 final String phone = lists.get(i).getPhone();
-                final CharSequence[] dialogItem = {"Edit", "Delete"};
+                final CharSequence[] dialogItem = {"Detail", "Edit", "Delete"};
                 dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (i) {
                             case 0:
+                                Intent intent2 = new Intent(MainActivity.this, DetailActivity.class);
+                                intent2.putExtra("nim", nim);
+                                intent2.putExtra("name", name);
+                                intent2.putExtra("email", email);
+                                intent2.putExtra("phone", phone);
+                                startActivity(intent2);
+                                break;
+                            case 1:
                                 Intent intent = new Intent(MainActivity.this, EditorActivity.class);
                                 intent.putExtra("nim", nim);
                                 intent.putExtra("name", name);
@@ -70,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("phone", phone);
                                 startActivity(intent);
                                 break;
-                            case 1:
+                            case 2:
                                 db.delete(Integer.parseInt(nim));
                                 lists.clear();
                                 getData();
